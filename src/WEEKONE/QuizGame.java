@@ -1,3 +1,5 @@
+package WEEKONE;
+
 import java.util.Scanner;
 
 public class QuizGame {
