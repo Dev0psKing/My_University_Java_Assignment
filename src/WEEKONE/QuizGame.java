@@ -13,6 +13,7 @@ public class QuizGame {
                 "Who is the current president of the United States?"
         };
 
+
         String[] options = {
                 "A. Paris\nB. London\nC. Berlin\nD. Madrid",
                 "A. Earth\nB. Jupiter\nC. Saturn\nD. Venus",
