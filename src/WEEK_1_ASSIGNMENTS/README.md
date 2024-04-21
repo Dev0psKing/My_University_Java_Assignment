@@ -21,11 +21,11 @@ Welcome to the Java Quiz Game! This interactive console application tests your k
 
 ```bash
 cd java-quiz-game
-javac WEEKONE/QuizGame.java
+javac PROJECTS/WEEK_1_ASSIGNMENTS.QuizGame.java
 ```
 ## Run the Quiz Game:
 Execute the compiled Java program using java:
 
 ```bash
-java WEEKONE.QuizGame
+java WEEK_1_ASSIGNMENTS.QuizGame
 ```
