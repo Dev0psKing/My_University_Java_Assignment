@@ -4,7 +4,7 @@ You are tasked with creating a Java program that simulates a simple quiz game. T
 
 For this assignment, write a Java program that implements the functionality described in the scenario. Ensure that your program is error-free, compiles successfully, and produces the expected output. Test your program with different inputs to verify its correctness.
 
-Make sure the following requirements are met:
+## Make sure the following requirements are met:
 
 The program should include five multiple-choice questions with four options.
 The four options should be labeled A, B, C, and D.
