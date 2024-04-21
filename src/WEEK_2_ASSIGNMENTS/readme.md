@@ -50,6 +50,8 @@ public class Main {
     }
 }
 
+```
+
 #### Contributing
 Contributions are welcome! Feel free to submit issues or pull requests if you have any suggestions for improvements or feature additions.
 
