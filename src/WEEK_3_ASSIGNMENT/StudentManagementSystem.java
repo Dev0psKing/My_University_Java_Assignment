@@ -1,20 +1,29 @@
-
+package WEEK_3_ASSIGNMENT;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Student Record Management System
+ * StudentManagementSystem class to manage student records.
  *
- * This program allows administrators to manage student records, including
- * adding new students, updating student information, and viewing student details.
+ * This class provides functionality to add, update, and view student records.
+ * It also includes validation for user input and handles exceptions.
  *
  * @author [Your Name]
  */
-class StudentManagementSystem {
-    private static ArrayList<Student> students = new ArrayList<>();
-    private static int totalStudents = 0;
-    private static Scanner scanner = new Scanner(System.in);
+public class StudentManagementSystem {
+    private ArrayList<Student> students;
+    private Scanner scanner;
+
+    /**
+     * Constructor for the StudentManagementSystem class.
+     * Initializes the students list and scanner.
+     */
+    public StudentManagementSystem() {
+        students = new ArrayList<>();
+        scanner = new Scanner(System.in);
+    }
 
     /**
      * Main entry point of the program.
@@ -22,6 +31,14 @@ class StudentManagementSystem {
      * @param args Command-line arguments (not used)
      */
     public static void main(String[] args) {
+        StudentManagementSystem sms = new StudentManagementSystem();
+        sms.run();
+    }
+
+    /**
+     * Runs the student management system program.
+     */
+    private void run() {
         boolean exit = false;
 
         while (!exit) {
@@ -51,7 +68,7 @@ class StudentManagementSystem {
     /**
      * Displays the menu of options for the administrator.
      */
-    private static void displayMenu() {
+    private void displayMenu() {
         System.out.println("\nStudent Record Management System");
         System.out.println("1. Add Student");
         System.out.println("2. Update Student");
@@ -65,12 +82,12 @@ class StudentManagementSystem {
      *
      * @return The choice as an integer
      */
-    private static int getChoice() {
+    private int getChoice() {
         int choice = -1;
         while (choice < 1 || choice > 4) {
-            if (scanner.hasNextInt()) {
+            try {
                 choice = scanner.nextInt();
-            } else {
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 scanner.nextLine(); // Consume the invalid input
             }
@@ -82,32 +99,35 @@ class StudentManagementSystem {
     /**
      * Adds a new student to the system.
      */
-    private static void addStudent() {
+    private void addStudent() {
+        System.out.print("Enter student ID: ");
+        String studentID = scanner.nextLine();
+
+        // Validate student ID
+        if (studentID.trim().isEmpty()) {
+            System.out.println("Student ID cannot be empty.");
+            return;
+        }
+
         System.out.print("Enter student first name: ");
         String firstName = scanner.nextLine();
 
         System.out.print("Enter student last name: ");
         String lastName = scanner.nextLine();
 
-        System.out.print("Enter student age: ");
-        int age = -1;
-        while (age < 0) {
-            if (scanner.hasNextInt()) {
-                age = scanner.nextInt();
-            } else {
-                System.out.println("Invalid input for age. Please enter a number.");
-                scanner.nextLine(); // Consume the invalid input
-            }
+        // Validate name
+        if (firstName.trim().isEmpty() || lastName.trim().isEmpty()) {
+            System.out.println("First name and last name cannot be empty.");
+            return;
         }
-        scanner.nextLine(); // Consume the newline character
 
-        System.out.print("Enter student grade: ");
-        double grade = scanner.nextDouble();
+        String fullName = firstName.trim() + " " + lastName.trim();
 
-        String fullName = firstName + " " + lastName;
-        Student student = new Student(fullName, age, grade);
+        int age = getAge();
+        String grade = getGrade();
+
+        Student student = new Student(studentID, fullName, age, grade);
         students.add(student);
-        totalStudents++;
 
         System.out.println("Student added successfully.");
     }
@@ -115,12 +135,11 @@ class StudentManagementSystem {
     /**
      * Updates the information of an existing student.
      */
-    private static void updateStudent() {
+    private void updateStudent() {
         System.out.print("Enter student ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        String studentID = scanner.nextLine();
 
-        Student student = findStudent(id);
+        Student student = findStudent(studentID);
         if (student != null) {
             System.out.print("Enter new first name (or enter to skip): ");
             String firstName = scanner.nextLine();
@@ -131,16 +150,13 @@ class StudentManagementSystem {
                 student.setName(fullName);
             }
 
-            System.out.print("Enter new age (or enter -1 to skip): ");
-            int age = scanner.nextInt();
+            int age = getAge("Enter new age (or enter -1 to skip): ");
             if (age != -1) {
                 student.setAge(age);
             }
-            scanner.nextLine(); // Consume the newline character
 
-            System.out.print("Enter new grade (or enter -1 to skip): ");
-            double grade = scanner.nextDouble();
-            if (grade != -1) {
+            String grade = getGrade("Enter new grade (A, B, C, D, or F) (or enter to skip): ");
+            if (!grade.isEmpty()) {
                 student.setGrade(grade);
             }
 
@@ -153,7 +169,7 @@ class StudentManagementSystem {
     /**
      * Views the details of all students in the system.
      */
-    private static void viewStudents() {
+    private void viewStudents() {
         if (students.isEmpty()) {
             System.out.println("No students found.");
         } else {
@@ -167,12 +183,12 @@ class StudentManagementSystem {
     /**
      * Finds a student by their ID.
      *
-     * @param id The ID of the student to find
+     * @param studentID The ID of the student to find
      * @return The Student object if found, or null if not found
      */
-    private static Student findStudent(int id) {
+    private Student findStudent(String studentID) {
         for (Student student : students) {
-            if (student.getId() == id) {
+            if (student.getStudentID().equals(studentID)) {
                 return student;
             }
         }
@@ -180,31 +196,100 @@ class StudentManagementSystem {
     }
 
     /**
+     * Gets a valid age from the user.
+     *
+     * @return The age as an integer, or -1 if the user enters -1
+     */
+    private int getAge() {
+        return getAge("Enter student age: ");
+    }
+
+    /**
+     * Gets a valid age from the user with a prompt.
+     *
+     * @param prompt The prompt to display to the user
+     * @return The age as an integer, or -1 if the user enters -1
+     */
+    private int getAge(String prompt) {
+        int age = -1;
+        while (age < 0) {
+            System.out.print(prompt);
+            try {
+                age = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input for age. Please enter a number.");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
+        scanner.nextLine(); // Consume the newline character
+        return age;
+    }
+
+    /**
+     * Gets a valid grade from the user.
+     *
+     * @return The grade as a string (A, B, C, D, or F)
+     */
+    private String getGrade() {
+        return getGrade("Enter student grade (A, B, C, D, or F): ");
+    }
+
+    /**
+     * Gets a valid grade from the user with a prompt.
+     *
+     * @param prompt The prompt to display to the user
+     * @return The grade as a string (A, B, C, D, or F), or an empty string if the user enters nothing
+     */
+    private String getGrade(String prompt) {
+        String grade;
+        while (true) {
+            System.out.print(prompt);
+            grade = scanner.nextLine().toUpperCase();
+            if (isValidGrade(grade) || grade.isEmpty()) {
+                break;
+            } else {
+                System.out.println("Invalid grade input. Please enter A, B, C, D, or F.");
+            }
+        }
+        return grade;
+    }
+
+    /**
+     * Checks if the given grade is valid (A, B, C, D, or F).
+     *
+     * @param grade The grade to be checked
+     * @return true if the grade is valid, false otherwise
+     */
+    private boolean isValidGrade(String grade) {
+        return grade.equals("A") || grade.equals("B") || grade.equals("C") || grade.equals("D") || grade.equals("F");
+    }
+
+    /**
      * Represents a student in the system.
      */
     private static class Student {
-        private static int idCounter = 1;
-        private final int id;
+        private String studentID;
         private String name;
         private int age;
-        private double grade;
+        private String grade;
 
         /**
-         * Constructs a new Student object with the given name, age, and grade.
+         * Constructs a new Student object with the given student ID, name, age, and grade.
          *
-         * @param name  The name of the student
-         * @param age   The age of the student
-         * @param grade The grade of the student
+         * @param studentID The ID of the student
+         * @param name      The name of the student
+         * @param age       The age of the student
+         * @param grade     The grade of the student
          */
-        public Student(String name, int age, double grade) {
-            this.id = idCounter++;
+        public Student(String studentID, String name, int age, String grade) {
+            this.studentID = studentID;
             this.name = name;
             this.age = age;
             this.grade = grade;
         }
 
-        public int getId() {
-            return id;
+        public String getStudentID() {
+            return studentID;
         }
 
         public String getName() {
@@ -223,17 +308,17 @@ class StudentManagementSystem {
             this.age = age;
         }
 
-        public double getGrade() {
+        public String getGrade() {
             return grade;
         }
 
-        public void setGrade(double grade) {
+        public void setGrade(String grade) {
             this.grade = grade;
         }
 
         @Override
         public String toString() {
-            return "ID: " + id + ", Name: " + name + ", Age: " + age + ", Grade: " + grade;
+            return "Student ID: " + studentID + ", Name: " + name + ", Age: " + age + ", Grade: " + grade;
         }
     }
 }
