@@ -70,9 +70,10 @@ class StudentManagementSystem {
                 choice = scanner.nextInt();
             } else {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.next();
+                scanner.nextLine(); // Consume the invalid input
             }
         }
+        scanner.nextLine(); // Consume the newline character
         return choice;
     }
 
@@ -80,8 +81,11 @@ class StudentManagementSystem {
      * Adds a new student to the system.
      */
     private static void addStudent() {
-        System.out.print("Enter student name: ");
-        String name = scanner.nextLine(); // Read the entire line
+        System.out.print("Enter student first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter student last name: ");
+        String lastName = scanner.nextLine();
 
         System.out.print("Enter student age: ");
         int age = -1;
@@ -90,14 +94,16 @@ class StudentManagementSystem {
                 age = scanner.nextInt();
             } else {
                 System.out.println("Invalid input for age. Please enter a number.");
-                scanner.next(); // Consume the invalid input
+                scanner.nextLine(); // Consume the invalid input
             }
         }
+        scanner.nextLine(); // Consume the newline character
 
         System.out.print("Enter student grade: ");
         double grade = scanner.nextDouble();
 
-        Student student = new Student(name, age, grade);
+        String fullName = firstName + " " + lastName;
+        Student student = new Student(fullName, age, grade);
         students.add(student);
         totalStudents++;
 
@@ -110,13 +116,17 @@ class StudentManagementSystem {
     private static void updateStudent() {
         System.out.print("Enter student ID: ");
         int id = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
 
         Student student = findStudent(id);
         if (student != null) {
-            System.out.print("Enter new name (or enter to skip): ");
-            String name = scanner.next();
-            if (!name.isEmpty()) {
-                student.setName(name);
+            System.out.print("Enter new first name (or enter to skip): ");
+            String firstName = scanner.nextLine();
+            System.out.print("Enter new last name (or enter to skip): ");
+            String lastName = scanner.nextLine();
+            String fullName = firstName.trim() + " " + lastName.trim();
+            if (!fullName.trim().isEmpty()) {
+                student.setName(fullName);
             }
 
             System.out.print("Enter new age (or enter -1 to skip): ");
@@ -124,6 +134,7 @@ class StudentManagementSystem {
             if (age != -1) {
                 student.setAge(age);
             }
+            scanner.nextLine(); // Consume the newline character
 
             System.out.print("Enter new grade (or enter -1 to skip): ");
             double grade = scanner.nextDouble();
