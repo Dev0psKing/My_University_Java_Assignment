@@ -32,22 +32,21 @@ The Student Record Management System is a Java program designed to empower admin
 1. Compile the Java source files:
 
 ## System Architecture
-Student Data Storage
+- **Student Data Storage**
 
-The system uses individual variables to store student information, such as name, ID, age, and grade.
-Student Management
 
-The Student Management logic is implemented within a dedicated classless structure, employing static variables to store the total number of students and the student list.
-Administrator Interface
-The system provides a user-friendly interface for administrators. A menu is displayed with options to add a new student, update student information, and view student details. The administrator is prompted for necessary inputs, and the requested operations are performed using the Student Management logic.
-Error Handling
-The system implements error handling to manage cases where the student ID is not found or invalid inputs are provided, ensuring a smooth and error-free experience for administrators.
+- **The system uses individual variables to store student information, such as name, ID, age, and grade.
+Student Management**
+
+
+- **The Student Management logic is implemented within a dedicated classless structure, employing static variables to store the total number of students and the student list.
+Administrator Interface**
+
+
+- **The system provides a user-friendly interface for administrators. A menu is displayed with options to add a new student, update student information, and view student details. The administrator is prompted for necessary inputs, and the requested operations are performed using the Student Management logic.
+Error Handling**
+
+
+- The system implements error handling to manage cases where the student ID is not found or invalid inputs are provided, ensuring a smooth and error-free experience for administrators.
 Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
-To contribute:
 
-Fork the repository
-Create a new branch (git checkout -b feature/your-feature)
-Commit your changes (git commit -am 'Add your feature')
-Push to the branch (git push origin feature/your-feature)
-Open a Pull Request
