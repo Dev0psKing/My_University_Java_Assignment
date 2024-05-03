@@ -47,6 +47,6 @@ Administrator Interface**
 Error Handling**
 
 
-- The system implements error handling to manage cases where the student ID is not found or invalid inputs are provided, ensuring a smooth and error-free experience for administrators.
-Contributing
+- **The system implements error handling to manage cases where the student ID is not found or invalid inputs are provided, ensuring a smooth and error-free experience for administrators.
+Contributing**
 
