@@ -32,3 +32,44 @@ This is a Java program that implements a simple Student Record Management System
 
 ```bash
 git clone https://github.com/your-username/student-management-system.git
+
+cd student-management-system
+```
+
+## Usage
+
+1. Compile the Java source files:
+
+```bash
+javac StudentManagementSystem.java
+```
+2. Run the compiled program:
+```bash
+java StudentManagementSystem
+```
+
+3. Follow the menu prompts to perform various operations:
+
+**Add a new student**
+
+**Update an existing student's information**
+
+**View the list of students**
+
+**Exit the program**
+
+
+
+## Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+To contribute:
+
+Fork the repository
+
+Create a new branch (git checkout -b feature/your-feature)
+
+Commit your changes (git commit -am 'Add your feature')
+
+Push to the branch (git push origin feature/your-feature)
+
+Open a Pull Request
