@@ -1,5 +1,6 @@
-You are working on a data analysis project where you need to process an array of opening stock prices containing 10 days of data as float datatype.
+## Question:
 
+You are working on a data analysis project where you need to process an array of opening stock prices containing 10 days of data as float datatype.
 
 Consider a scenario where you have been given an array of integers representing the daily stock prices of a company for a given period. You are also provided with an ArrayList of stock prices for the same period You are required to implement a program that performs the following tasks:
 
