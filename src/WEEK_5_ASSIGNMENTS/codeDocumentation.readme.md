@@ -1,4 +1,3 @@
-```markdown
 # Course and Student Management System
 
 ## Description
@@ -63,4 +62,3 @@ This Java program is designed to manage courses and student enrollments, allowin
 
 - The program handles course addition, student enrollment, grading, and overall grade calculation.
 - Ensure to use appropriate variable names and follow coding best practices for readability and maintainability.
-```
