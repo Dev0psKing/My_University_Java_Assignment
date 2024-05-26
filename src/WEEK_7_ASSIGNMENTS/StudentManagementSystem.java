@@ -770,8 +770,6 @@ public class StudentManagementSystem extends JFrame {
 
     }
 
-
-
     private void clearFormFields() {
 
         tfName.setText("");
