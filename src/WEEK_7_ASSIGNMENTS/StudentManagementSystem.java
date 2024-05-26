@@ -1,7 +1,5 @@
 package WEEK_7_ASSIGNMENTS;
 
-
-
 import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
