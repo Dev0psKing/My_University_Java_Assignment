@@ -5,7 +5,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-
 /**
 
  * 1. Design and implement an interface named "Vehicle" that includes methods for retrieving the

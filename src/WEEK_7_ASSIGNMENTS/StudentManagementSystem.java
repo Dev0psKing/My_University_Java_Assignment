@@ -806,8 +806,6 @@ public class StudentManagementSystem extends JFrame {
 
         Map<String, Map<String, String>> studentGrades = controller.getStudentGrades();
 
-
-
         // Display course enrollments
 
         System.out.println("Course Enrollments:");
@@ -819,8 +817,6 @@ public class StudentManagementSystem extends JFrame {
             System.out.println("Enrolled Students: " + entry.getValue());
 
         }
-
-
 
         // Display student grades
 
