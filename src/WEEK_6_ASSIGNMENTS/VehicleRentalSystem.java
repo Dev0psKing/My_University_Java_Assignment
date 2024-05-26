@@ -1,6 +1,5 @@
 package WEEK_6_ASSIGNMENTS;
 
-
 import java.util.InputMismatchException;
 
 import java.util.Scanner;
