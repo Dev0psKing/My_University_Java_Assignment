@@ -798,8 +798,6 @@ public class StudentManagementSystem extends JFrame {
 
     }
 
-
-
     private void displayCourseEnrollmentsAndGrades() {
 
         Map<String, ArrayList<String>> courseEnrollments = controller.getCourseEnrollments();
