@@ -1,5 +1,7 @@
 package WEEK_7_ASSIGNMENTS;
 
+
+
 import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
@@ -527,53 +529,44 @@ public class StudentManagementSystem extends JFrame {
     private class AddStudentActionListener implements ActionListener {
 
         @Override
-
         public void actionPerformed(ActionEvent e) {
+            try {
+                String name = tfName.getText().trim();
+                String rollNumber = tfRollNumber.getText().trim();
+                String email = tfEmail.getText().trim();
+                String contactNumber = tfContactNumber.getText().trim();
+                String address = tfAddress.getText().trim();
+                String gender = cbGender.getSelectedItem().toString();
+                String nationality = tfNationality.getText().trim();
 
-            String name = tfName.getText();
+                if (name.isEmpty() || rollNumber.isEmpty() || email.isEmpty() || contactNumber.isEmpty() ||
+                        address.isEmpty() || nationality.isEmpty() || tfPoints10th.getText().trim().isEmpty() ||
+                        tfPercentage12th.getText().trim().isEmpty()) {
+                    throw new IllegalArgumentException("All fields must be filled.");
+                }
 
-            String rollNumber = tfRollNumber.getText();
+                int yearOfPassing10th = Integer.parseInt(cbYearOfPassing10th.getSelectedItem().toString());
+                int yearOfPassing12th = Integer.parseInt(cbYearOfPassing12th.getSelectedItem().toString());
+                double points10th = Double.parseDouble(tfPoints10th.getText().trim());
+                double percentage12th = Double.parseDouble(tfPercentage12th.getText().trim());
 
-            String email = tfEmail.getText();
+                Student student = new Student(name, rollNumber, email, contactNumber, address, gender, nationality,
+                        yearOfPassing10th, yearOfPassing12th, points10th, percentage12th);
 
-            String contactNumber = tfContactNumber.getText();
-
-            String address = tfAddress.getText();
-
-            String gender = cbGender.getSelectedItem().toString();
-
-            String nationality = tfNationality.getText();
-
-            int yearOfPassing10th = Integer.parseInt(cbYearOfPassing10th.getSelectedItem().toString());
-
-            int yearOfPassing12th = Integer.parseInt(cbYearOfPassing12th.getSelectedItem().toString());
-
-            double points10th = Double.parseDouble(tfPoints10th.getText());
-
-            double percentage12th = Double.parseDouble(tfPercentage12th.getText());
-
-
-
-            Student student = new Student(name, rollNumber, email, contactNumber, address, gender, nationality,
-
-                    yearOfPassing10th, yearOfPassing12th, points10th, percentage12th);
-
-
-
-            if (controller.addStudent(student)) {
-
-                JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student added successfully.");
-
-                clearFormFields();
-
-            } else {
-
-                JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student with this Roll Number already exists.");
-
+                if (controller.addStudent(student)) {
+                    JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student added successfully.");
+                    clearFormFields();
+                } else {
+                    JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student with this Roll Number already exists.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(StudentManagementSystem.this, "Please enter valid numbers for Points and Percentages.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(StudentManagementSystem.this, ex.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(StudentManagementSystem.this, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-
         }
-
     }
 
 
@@ -581,55 +574,45 @@ public class StudentManagementSystem extends JFrame {
     private class UpdateStudentActionListener implements ActionListener {
 
         @Override
-
         public void actionPerformed(ActionEvent e) {
+            try {
+                String name = tfName.getText().trim();
+                String rollNumber = tfRollNumber.getText().trim();
+                String email = tfEmail.getText().trim();
+                String contactNumber = tfContactNumber.getText().trim();
+                String address = tfAddress.getText().trim();
+                String gender = cbGender.getSelectedItem().toString();
+                String nationality = tfNationality.getText().trim();
 
-            String name = tfName.getText();
+                if (name.isEmpty() || rollNumber.isEmpty() || email.isEmpty() || contactNumber.isEmpty() ||
+                        address.isEmpty() || nationality.isEmpty() || tfPoints10th.getText().trim().isEmpty() ||
+                        tfPercentage12th.getText().trim().isEmpty()) {
+                    throw new IllegalArgumentException("All fields must be filled.");
+                }
 
-            String rollNumber = tfRollNumber.getText();
+                int yearOfPassing10th = Integer.parseInt(cbYearOfPassing10th.getSelectedItem().toString());
+                int yearOfPassing12th = Integer.parseInt(cbYearOfPassing12th.getSelectedItem().toString());
+                double points10th = Double.parseDouble(tfPoints10th.getText().trim());
+                double percentage12th = Double.parseDouble(tfPercentage12th.getText().trim());
 
-            String email = tfEmail.getText();
+                Student updatedStudent = new Student(name, rollNumber, email, contactNumber, address, gender, nationality,
+                        yearOfPassing10th, yearOfPassing12th, points10th, percentage12th);
 
-            String contactNumber = tfContactNumber.getText();
-
-            String address = tfAddress.getText();
-
-            String gender = cbGender.getSelectedItem().toString();
-
-            String nationality = tfNationality.getText();
-
-            int yearOfPassing10th = Integer.parseInt(cbYearOfPassing10th.getSelectedItem().toString());
-
-            int yearOfPassing12th = Integer.parseInt(cbYearOfPassing12th.getSelectedItem().toString());
-
-            double points10th = Double.parseDouble(tfPoints10th.getText());
-
-            double percentage12th = Double.parseDouble(tfPercentage12th.getText());
-
-
-
-            Student updatedStudent = new Student(name, rollNumber, email, contactNumber, address, gender, nationality,
-
-                    yearOfPassing10th, yearOfPassing12th, points10th, percentage12th);
-
-
-
-            if (controller.updateStudent(selectedRollNumber, updatedStudent)) {
-
-                JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student updated successfully.");
-
-                clearFormFields();
-
-                selectedRollNumber = null;
-
-            } else {
-
-                JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student not found.");
-
+                if (controller.updateStudent(selectedRollNumber, updatedStudent)) {
+                    JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student updated successfully.");
+                    clearFormFields();
+                    selectedRollNumber = null;
+                } else {
+                    JOptionPane.showMessageDialog(StudentManagementSystem.this, "Student not found.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(StudentManagementSystem.this, "Please enter valid numbers for Points and Percentages.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(StudentManagementSystem.this, ex.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(StudentManagementSystem.this, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-
         }
-
     }
 
 
@@ -768,6 +751,8 @@ public class StudentManagementSystem extends JFrame {
 
     }
 
+
+
     private void clearFormFields() {
 
         tfName.setText("");
@@ -794,11 +779,15 @@ public class StudentManagementSystem extends JFrame {
 
     }
 
+
+
     private void displayCourseEnrollmentsAndGrades() {
 
         Map<String, ArrayList<String>> courseEnrollments = controller.getCourseEnrollments();
 
         Map<String, Map<String, String>> studentGrades = controller.getStudentGrades();
+
+
 
         // Display course enrollments
 
@@ -811,6 +800,8 @@ public class StudentManagementSystem extends JFrame {
             System.out.println("Enrolled Students: " + entry.getValue());
 
         }
+
+
 
         // Display student grades
 
@@ -825,7 +816,7 @@ public class StudentManagementSystem extends JFrame {
         }
 
     }
-
+    
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
@@ -839,3 +830,4 @@ public class StudentManagementSystem extends JFrame {
     }
 
 }
+
