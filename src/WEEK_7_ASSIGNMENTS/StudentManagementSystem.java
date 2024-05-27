@@ -1,7 +1,5 @@
 package WEEK_7_ASSIGNMENTS;
 
-
-
 import javax.swing.*;
 
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import java.util.Map;
-
 
 
 class Student {
