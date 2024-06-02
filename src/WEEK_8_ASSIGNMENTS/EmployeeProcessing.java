@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -42,16 +44,36 @@ class Employee {
                 '}';
     }
 }
+
 public class EmployeeProcessing {
     public static void main(String[] args) {
+        List<Employee> employees = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
         try {
-            // 1. Create a dataset of employees
-            List<Employee> employees = new ArrayList<>();
-            employees.add(new Employee("John Doe", 35, "IT", 60000.0));
-            employees.add(new Employee("Jane Smith", 28, "HR", 50000.0));
-            employees.add(new Employee("Bob Johnson", 42, "IT", 70000.0));
-            employees.add(new Employee("Alice Williams", 27, "Marketing", 55000.0));
-            employees.add(new Employee("Tom Brown", 33, "Finance", 65000.0));
+            System.out.print("Enter the number of employees: ");
+            int numEmployees = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            for (int i = 0; i < numEmployees; i++) {
+                System.out.println("\nEnter details for Employee " + (i + 1) + ":");
+
+                System.out.print("Name: ");
+                String name = scanner.nextLine();
+
+                System.out.print("Age: ");
+                int age = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
+
+                System.out.print("Department: ");
+                String department = scanner.nextLine();
+
+                System.out.print("Salary: ");
+                double salary = scanner.nextDouble();
+                scanner.nextLine(); // Consume newline character
+
+                employees.add(new Employee(name, age, department, salary));
+            }
 
             // 2. Define a function that concatenates employee name and department
             Function<Employee, String> getNameAndDepartment = employee -> employee.getName() + " - " + employee.getDepartment();
@@ -61,7 +83,7 @@ public class EmployeeProcessing {
                     .map(getNameAndDepartment)
                     .collect(Collectors.toList());
 
-            System.out.println("Name and Department List:");
+            System.out.println("\nName and Department List:");
             nameAndDepartmentList.forEach(System.out::println);
 
             // 4. Find the average salary of all employees
@@ -80,8 +102,12 @@ public class EmployeeProcessing {
 
             System.out.println("\nEmployees above age " + ageThreshold + ":");
             employeesAboveThreshold.forEach(System.out::println);
-        } catch (RuntimeException e) {
+        } catch (InputMismatchException e) {
+            System.err.println("Error: Invalid input. Please enter a valid value.");
+        } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
         }
     }
 }
