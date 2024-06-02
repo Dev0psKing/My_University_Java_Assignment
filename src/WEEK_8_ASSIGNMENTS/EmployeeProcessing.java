@@ -7,10 +7,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 class Employee {
-    private String name;
-    private int age;
-    private String department;
-    private double salary;
+    private final String name;
+    private final int age;
+    private final String department;
+    private final double salary;
 
     public Employee(String name, int age, String department, double salary) {
         this.name = name;
@@ -49,9 +49,8 @@ class Employee {
 public class EmployeeProcessing {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
 
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter the number of employees: ");
             int numEmployees = getValidInt(scanner, "Please enter a valid number of employees");
 
@@ -68,7 +67,7 @@ public class EmployeeProcessing {
                 String department = getValidString(scanner, "Please enter a valid department");
 
                 System.out.print("Salary: ");
-                double salary = getValidDouble(scanner, "Please enter a valid salary");
+                double salary = getValidDouble(scanner);
 
                 employees.add(new Employee(name, age, department, salary));
             }
@@ -102,8 +101,6 @@ public class EmployeeProcessing {
             employeesAboveThreshold.forEach(System.out::println);
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
-        } finally {
-            scanner.close();
         }
     }
 
@@ -117,12 +114,12 @@ public class EmployeeProcessing {
         }
     }
 
-    private static double getValidDouble(Scanner scanner, String errorMessage) {
+    private static double getValidDouble(Scanner scanner) {
         while (true) {
             try {
                 return Double.parseDouble(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.err.println(errorMessage);
+                System.err.println("Please enter a valid salary");
             }
         }
     }
