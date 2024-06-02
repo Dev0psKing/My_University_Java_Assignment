@@ -127,6 +127,7 @@ public class EmployeeProcessing {
         }
     }
 
+
     private static String getValidString(Scanner scanner, String errorMessage) {
         String input = scanner.nextLine().trim();
         if (input.isEmpty()) {
