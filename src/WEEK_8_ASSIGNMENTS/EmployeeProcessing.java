@@ -42,7 +42,6 @@ class Employee {
                 '}';
     }
 }
-
 public class EmployeeProcessing {
     public static void main(String[] args) {
         try {
