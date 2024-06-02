@@ -51,22 +51,22 @@ public class EmployeeProcessing {
 
         try {
             System.out.print("Enter the number of employees: ");
-            int numEmployees = getValidInt(scanner);
+            int numEmployees = getValidInt(scanner, "Please enter a valid number of employees");
 
             for (int i = 0; i < numEmployees; i++) {
                 System.out.println("\nEnter details for Employee " + (i + 1) + ":");
 
                 System.out.print("Name: ");
-                String name = scanner.nextLine();
+                String name = getValidString(scanner, "Please enter a valid name");
 
                 System.out.print("Age: ");
-                int age = getValidInt(scanner);
+                int age = getValidInt(scanner, "Please enter a valid age");
 
                 System.out.print("Department: ");
-                String department = scanner.nextLine();
+                String department = getValidString(scanner, "Please enter a valid department");
 
                 System.out.print("Salary: ");
-                double salary = getValidDouble(scanner);
+                double salary = getValidDouble(scanner, "Please enter a valid salary");
 
                 employees.add(new Employee(name, age, department, salary));
             }
@@ -105,25 +105,34 @@ public class EmployeeProcessing {
         }
     }
 
-    private static int getValidInt(Scanner scanner) {
+    private static int getValidInt(Scanner scanner, String errorMessage) {
         while (true) {
             try {
                 return scanner.nextInt();
             } catch (java.util.InputMismatchException e) {
-                System.err.println("Invalid input. Please enter an integer value.");
+                System.err.println(errorMessage);
                 scanner.nextLine(); // Consume the invalid input
             }
         }
     }
 
-    private static double getValidDouble(Scanner scanner) {
+    private static double getValidDouble(Scanner scanner, String errorMessage) {
         while (true) {
             try {
                 return scanner.nextDouble();
             } catch (java.util.InputMismatchException e) {
-                System.err.println("Invalid input. Please enter a numeric value.");
+                System.err.println(errorMessage);
                 scanner.nextLine(); // Consume the invalid input
             }
         }
+    }
+
+    private static String getValidString(Scanner scanner, String errorMessage) {
+        String input = scanner.nextLine().trim();
+        if (input.isEmpty()) {
+            System.err.println(errorMessage);
+            return getValidString(scanner, errorMessage);
+        }
+        return input;
     }
 }
