@@ -67,10 +67,14 @@ public class EmployeeProcessing {
                 String department = getValidString(scanner, "Please enter a valid department");
 
                 System.out.print("Salary: ");
-                double salary = getValidDouble(scanner);
+                double salary = getValidDouble(scanner, "Please enter a valid salary");
 
                 employees.add(new Employee(name, age, department, salary));
             }
+
+            // Allow users to input the age threshold dynamically
+            System.out.print("Enter age threshold: ");
+            int ageThreshold = getValidInt(scanner, "Please enter a valid age threshold");
 
             // 2. Define a function that concatenates employee name and department
             Function<Employee, String> getNameAndDepartment = employee -> employee.getName() + " - " + employee.getDepartment();
@@ -91,8 +95,7 @@ public class EmployeeProcessing {
 
             System.out.println("\nAverage Salary: $" + averageSalary);
 
-            // 5. Filter employees whose age is above a certain threshold
-            int ageThreshold = 30;
+            // 5. Filter employees whose age is above the dynamic threshold
             List<Employee> employeesAboveThreshold = employees.stream()
                     .filter(employee -> employee.getAge() > ageThreshold)
                     .collect(Collectors.toList());
@@ -114,12 +117,12 @@ public class EmployeeProcessing {
         }
     }
 
-    private static double getValidDouble(Scanner scanner) {
+    private static double getValidDouble(Scanner scanner, String errorMessage) {
         while (true) {
             try {
                 return Double.parseDouble(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.err.println("Please enter a valid salary");
+                System.err.println(errorMessage);
             }
         }
     }
