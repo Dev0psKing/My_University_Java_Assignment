@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -52,8 +51,7 @@ public class EmployeeProcessing {
 
         try {
             System.out.print("Enter the number of employees: ");
-            int numEmployees = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
+            int numEmployees = getValidInt(scanner);
 
             for (int i = 0; i < numEmployees; i++) {
                 System.out.println("\nEnter details for Employee " + (i + 1) + ":");
@@ -62,15 +60,13 @@ public class EmployeeProcessing {
                 String name = scanner.nextLine();
 
                 System.out.print("Age: ");
-                int age = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
+                int age = getValidInt(scanner);
 
                 System.out.print("Department: ");
                 String department = scanner.nextLine();
 
                 System.out.print("Salary: ");
-                double salary = scanner.nextDouble();
-                scanner.nextLine(); // Consume newline character
+                double salary = getValidDouble(scanner);
 
                 employees.add(new Employee(name, age, department, salary));
             }
@@ -102,12 +98,32 @@ public class EmployeeProcessing {
 
             System.out.println("\nEmployees above age " + ageThreshold + ":");
             employeesAboveThreshold.forEach(System.out::println);
-        } catch (InputMismatchException e) {
-            System.err.println("Error: Invalid input. Please enter a valid value.");
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         } finally {
             scanner.close();
+        }
+    }
+
+    private static int getValidInt(Scanner scanner) {
+        while (true) {
+            try {
+                return scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.err.println("Invalid input. Please enter an integer value.");
+                scanner.nextLine(); // Consume the invalid input
+            }
+        }
+    }
+
+    private static double getValidDouble(Scanner scanner) {
+        while (true) {
+            try {
+                return scanner.nextDouble();
+            } catch (java.util.InputMismatchException e) {
+                System.err.println("Invalid input. Please enter a numeric value.");
+                scanner.nextLine(); // Consume the invalid input
+            }
         }
     }
 }
