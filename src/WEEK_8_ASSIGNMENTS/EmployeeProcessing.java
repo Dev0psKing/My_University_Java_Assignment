@@ -1,3 +1,5 @@
+package WEEK_8_ASSIGNMENTS;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -108,10 +110,9 @@ public class EmployeeProcessing {
     private static int getValidInt(Scanner scanner, String errorMessage) {
         while (true) {
             try {
-                return scanner.nextInt();
-            } catch (java.util.InputMismatchException e) {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
                 System.err.println(errorMessage);
-                scanner.nextLine(); // Consume the invalid input
             }
         }
     }
@@ -119,21 +120,30 @@ public class EmployeeProcessing {
     private static double getValidDouble(Scanner scanner, String errorMessage) {
         while (true) {
             try {
-                return scanner.nextDouble();
-            } catch (java.util.InputMismatchException e) {
+                return Double.parseDouble(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
                 System.err.println(errorMessage);
-                scanner.nextLine(); // Consume the invalid input
             }
         }
     }
 
-
     private static String getValidString(Scanner scanner, String errorMessage) {
-        String input = scanner.nextLine().trim();
-        if (input.isEmpty()) {
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                return input;
+            }
             System.err.println(errorMessage);
-            return getValidString(scanner, errorMessage);
         }
-        return input;
+    }
+
+    // Summary of Function interface in Java
+    private static void printFunctionInterfaceSummary() {
+        System.out.println("\nSummary of Function Interface in Java:");
+        System.out.println("The Function interface in Java represents a function that takes one argument and produces a result.");
+        System.out.println("It is a functional interface defined in the java.util.function package and contains the method:");
+        System.out.println("- R apply(T t): Applies this function to the given argument.");
+        System.out.println("In this program, we use the Function interface to create a function that takes an Employee object and returns a concatenated string of the employee's name and department.");
+        System.out.println("Using the Function interface, along with streams, helps in processing and manipulating collections in a declarative and concise manner.");
     }
 }
