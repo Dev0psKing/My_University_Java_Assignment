@@ -1,7 +1,7 @@
 
 # My University Java Assignments
 
-This repository contains the Java projects I did for in university this semester as assignments awarded by my Professor. in Computer Science Department, spanning across 8 weeks. Each week features a different project, demonstrating various Java programming skills and concepts.
+This repository contains the Java projects I did in my university this semester as assignments awarded by my Professor. in Computer Science Department, spanning across 8 weeks. Each week features a different project, demonstrating various Java programming skills and concepts.
 
 ## Table of Contents
 - [Week 1: Java Quiz Game](#week-1-java-quiz-game)
