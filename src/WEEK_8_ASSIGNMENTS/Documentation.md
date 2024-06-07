@@ -1,4 +1,3 @@
-```markdown
 # Employee Management Application
 
 ## Overview
@@ -7,13 +6,13 @@ This Java application allows users to manage a list of employees by inputting th
 
 ## Table of Contents
 1. [Classes and Methods](#classes-and-methods)
-   - [Employee Class](#employee-class)
-   - [EmployeeProcessing Class](#employeeprocessing-class)
+    - [Employee Class](#employee-class)
+    - [EmployeeProcessing Class](#employeeprocessing-class)
 2. [Usage](#usage)
 3. [Functions and Processing](#functions-and-processing)
-   - [Concatenate Name and Department](#concatenate-name-and-department)
-   - [Calculate Average Salary](#calculate-average-salary)
-   - [Filter by Age](#filter-by-age)
+    - [Concatenate Name and Department](#concatenate-name-and-department)
+    - [Calculate Average Salary](#calculate-average-salary)
+    - [Filter by Age](#filter-by-age)
 4. [Input Validation](#input-validation)
 5. [Function Interface Summary](#function-interface-summary)
 
@@ -102,5 +101,4 @@ private static void printFunctionInterfaceSummary() {
     System.out.println("In this program, we use the Function interface to create a function that takes an Employee object and returns a concatenated string of the employee's name and department.");
     System.out.println("Using the Function interface, along with streams, helps in processing and manipulating collections in a declarative and concise manner.");
 }
-```
 ```
