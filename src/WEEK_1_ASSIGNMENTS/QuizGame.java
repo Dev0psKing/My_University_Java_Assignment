@@ -36,6 +36,7 @@ public class QuizGame {
             System.out.print("Enter your answer (A, B, C, or D): ");
             char userAnswer = scanner.nextLine().toUpperCase().charAt(0);
 
+
             if (userAnswer == answers[i]) {
                 System.out.println("Correct!");
                 score++;
