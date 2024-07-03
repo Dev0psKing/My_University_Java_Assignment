@@ -326,6 +326,7 @@ class Order {
         this.status = newStatus;
     }
 
+
     public int getOrderID() { return orderID; }
     public Customer getCustomer() { return customer; }
     public List<Product> getProducts() { return products; }
