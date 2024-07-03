@@ -1,4 +1,4 @@
-package com.ecommerce;
+package WEEK_10_ASSIGNMENTS;
 
 import java.util.ArrayList;
 import java.util.List;
