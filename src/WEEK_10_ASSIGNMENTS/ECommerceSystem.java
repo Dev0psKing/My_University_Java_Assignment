@@ -16,35 +16,31 @@ public class ECommerceSystem {
         initializeInventory();
 
         while (true) {
-            System.out.println("\n--- E-Commerce System ---");
-            System.out.println("1. Create new customer");
-            System.out.println("2. Browse products");
-            System.out.println("3. Add product to cart");
-            System.out.println("4. View cart");
-            System.out.println("5. Remove product from cart");
-            System.out.println("6. Place order");
-            System.out.println("7. View orders");
-            System.out.println("8. Exit");
-
+            displayMenu();
             int choice = getIntInput("Enter your choice: ");
 
-            switch (choice) {
-                case 1: createCustomer(); break;
-                case 2: browseProducts(); break;
-                case 3: addToCart(); break;
-                case 4: viewCart(); break;
-                case 5: removeFromCart(); break;
-                case 6: placeOrder(); break;
-                case 7: viewOrders(); break;
-                case 8:
-                    System.out.println("Thank you for using the E-Commerce System. Goodbye!");
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+            try {
+                switch (choice) {
+                    case 1: createCustomer(); break;
+                    case 2: browseProducts(); break;
+                    case 3: addToCart(); break;
+                    case 4: viewCart(); break;
+                    case 5: removeFromCart(); break;
+                    case 6: placeOrder(); break;
+                    case 7: viewOrders(); break;
+                    case 8:
+                        System.out.println("Thank you for using the E-Commerce System. Goodbye!");
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
             }
         }
     }
 
+    // Initialize inventory with some products
     private static void initializeInventory() {
         inventory.add(new Product(1, "Laptop", 999.99));
         inventory.add(new Product(2, "Smartphone", 499.99));
@@ -53,6 +49,20 @@ public class ECommerceSystem {
         inventory.add(new Product(5, "Smartwatch", 199.99));
     }
 
+    // Display main menu
+    private static void displayMenu() {
+        System.out.println("\n--- E-Commerce System ---");
+        System.out.println("1. Create new customer");
+        System.out.println("2. Browse products");
+        System.out.println("3. Add product to cart");
+        System.out.println("4. View cart");
+        System.out.println("5. Remove product from cart");
+        System.out.println("6. Place order");
+        System.out.println("7. View orders");
+        System.out.println("8. Exit");
+    }
+
+    // Create a new customer
     private static void createCustomer() {
         String name = getStringInput("Enter customer name: ");
         int id = customers.size() + 1;
@@ -61,6 +71,7 @@ public class ECommerceSystem {
         System.out.println("Customer created: " + customer);
     }
 
+    // Display all products in inventory
     private static void browseProducts() {
         System.out.println("\nAvailable products:");
         for (Product product : inventory) {
@@ -68,116 +79,90 @@ public class ECommerceSystem {
         }
     }
 
-    private static void addToCart() {
+    // Add a product to customer's cart
+    private static void addToCart() throws Exception {
         if (customers.isEmpty()) {
-            System.out.println("No customers available. Please create a customer first.");
-            return;
+            throw new Exception("No customers available. Please create a customer first.");
         }
 
         int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
-            System.out.println("Customer not found.");
-            return;
+            throw new Exception("Customer with ID " + customerId + " not found.");
         }
 
         int productId = getIntInput("Enter product ID to add to cart: ");
         Product product = findProduct(productId);
 
         if (product == null) {
-            System.out.println("Product not found.");
-            return;
+            throw new Exception("Product with ID " + productId + " not found.");
         }
 
         customer.addToCart(product);
         System.out.println("Product added to cart.");
     }
 
-    private static void viewCart() {
+    // View customer's cart
+    private static void viewCart() throws Exception {
         if (customers.isEmpty()) {
-            System.out.println("No customers available. Please create a customer first.");
-            return;
+            throw new Exception("No customers available. Please create a customer first.");
         }
 
         int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
-            System.out.println("Customer not found.");
-            return;
+            throw new Exception("Customer with ID " + customerId + " not found.");
         }
 
-        List<Product> cart = customer.getShoppingCart();
-        if (cart.isEmpty()) {
-            System.out.println("Cart is empty.");
-        } else {
-            System.out.println("Cart contents:");
-            for (Product product : cart) {
-                System.out.println(product);
-            }
-            System.out.println("Total: $" + customer.calculateTotal());
-        }
+        customer.displayCart();
     }
 
-    private static void removeFromCart() {
+    // Remove a product from customer's cart
+    private static void removeFromCart() throws Exception {
         if (customers.isEmpty()) {
-            System.out.println("No customers available. Please create a customer first.");
-            return;
+            throw new Exception("No customers available. Please create a customer first.");
         }
 
         int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
-            System.out.println("Customer not found.");
-            return;
+            throw new Exception("Customer with ID " + customerId + " not found.");
         }
 
-        List<Product> cart = customer.getShoppingCart();
-        if (cart.isEmpty()) {
-            System.out.println("Cart is empty.");
-            return;
-        }
-
-        System.out.println("Cart contents:");
-        for (Product product : cart) {
-            System.out.println(product);
-        }
+        customer.displayCart();
 
         int productId = getIntInput("Enter product ID to remove from cart: ");
         Product product = findProduct(productId);
 
         if (product == null) {
-            System.out.println("Product not found in cart.");
-            return;
+            throw new Exception("Product with ID " + productId + " not found in cart.");
         }
 
         customer.removeFromCart(product);
         System.out.println("Product removed from cart.");
     }
 
-    private static void placeOrder() {
+    // Place an order for a customer
+    private static void placeOrder() throws Exception {
         if (customers.isEmpty()) {
-            System.out.println("No customers available. Please create a customer first.");
-            return;
+            throw new Exception("No customers available. Please create a customer first.");
         }
 
         int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
-            System.out.println("Customer not found.");
-            return;
+            throw new Exception("Customer with ID " + customerId + " not found.");
         }
 
-        List<Product> cart = customer.getShoppingCart();
-        if (cart.isEmpty()) {
-            System.out.println("Cart is empty. Cannot place an order.");
-            return;
+        if (customer.getShoppingCart().isEmpty()) {
+            throw new Exception("Cart is empty. Cannot place an order.");
         }
 
-        Order order = new Order(orderIdCounter++, customer, new ArrayList<>(cart));
+        Order order = new Order(orderIdCounter++, customer, new ArrayList<>(customer.getShoppingCart()));
         orders.add(order);
         customer.clearCart();
 
@@ -185,6 +170,7 @@ public class ECommerceSystem {
         System.out.println(order.generateOrderSummary());
     }
 
+    // View all orders
     private static void viewOrders() {
         if (orders.isEmpty()) {
             System.out.println("No orders placed yet.");
@@ -198,6 +184,7 @@ public class ECommerceSystem {
         }
     }
 
+    // Find a customer by ID
     private static Customer findCustomer(int id) {
         return customers.stream()
                 .filter(c -> c.getCustomerID() == id)
@@ -205,6 +192,7 @@ public class ECommerceSystem {
                 .orElse(null);
     }
 
+    // Find a product by ID
     private static Product findProduct(int id) {
         return inventory.stream()
                 .filter(p -> p.getProductID() == id)
@@ -212,6 +200,7 @@ public class ECommerceSystem {
                 .orElse(null);
     }
 
+    // Get string input from user
     private static String getStringInput(String prompt) {
         String input;
         do {
@@ -224,6 +213,7 @@ public class ECommerceSystem {
         return input;
     }
 
+    // Get integer input from user
     private static int getIntInput(String prompt) {
         while (true) {
             try {
@@ -247,7 +237,7 @@ class Product {
     public Product(int productID, String name, double price) {
         this.productID = productID;
         this.name = name;
-        this.price = price;
+        setPrice(price);
     }
 
     public int getProductID() { return productID; }
@@ -264,7 +254,7 @@ class Product {
 
     @Override
     public String toString() {
-        return "Product{id=" + productID + ", name='" + name + "', price=$" + price + "}";
+        return String.format("Product{id=%d, name='%s', price=$%.2f}", productID, name, price);
     }
 }
 
@@ -299,12 +289,24 @@ class Customer {
         shoppingCart.clear();
     }
 
+    public void displayCart() {
+        if (shoppingCart.isEmpty()) {
+            System.out.println("Cart is empty.");
+        } else {
+            System.out.println("Cart contents:");
+            for (Product product : shoppingCart) {
+                System.out.println(product);
+            }
+            System.out.printf("Total: $%.2f%n", calculateTotal());
+        }
+    }
+
     public int getCustomerID() { return customerID; }
     public String getName() { return name; }
 
     @Override
     public String toString() {
-        return "Customer{id=" + customerID + ", name='" + name + "'}";
+        return String.format("Customer{id=%d, name='%s'}", customerID, name);
     }
 }
 
@@ -329,14 +331,14 @@ class Order {
 
     public String generateOrderSummary() {
         StringBuilder summary = new StringBuilder();
-        summary.append("Order ID: ").append(orderID).append("\n");
-        summary.append("Customer: ").append(customer.getName()).append("\n");
+        summary.append(String.format("Order ID: %d%n", orderID));
+        summary.append(String.format("Customer: %s%n", customer.getName()));
         summary.append("Products:\n");
         for (Product product : products) {
-            summary.append("- ").append(product.getName()).append(": $").append(product.getPrice()).append("\n");
+            summary.append(String.format("- %s: $%.2f%n", product.getName(), product.getPrice()));
         }
-        summary.append("Total: $").append(total).append("\n");
-        summary.append("Status: ").append(status);
+        summary.append(String.format("Total: $%.2f%n", total));
+        summary.append(String.format("Status: %s", status));
         return summary.toString();
     }
 
