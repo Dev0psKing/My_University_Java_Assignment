@@ -1,6 +1,9 @@
+package WEEK_10_ASSIGNMENTS;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class ECommerceSystem {
     private static List<Product> inventory = new ArrayList<>();
@@ -22,10 +25,8 @@ public class ECommerceSystem {
             System.out.println("6. Place order");
             System.out.println("7. View orders");
             System.out.println("8. Exit");
-            System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            int choice = getIntInput("Enter your choice: ");
 
             switch (choice) {
                 case 1: createCustomer(); break;
@@ -53,8 +54,7 @@ public class ECommerceSystem {
     }
 
     private static void createCustomer() {
-        System.out.print("Enter customer name: ");
-        String name = scanner.nextLine();
+        String name = getStringInput("Enter customer name: ");
         int id = customers.size() + 1;
         Customer customer = new Customer(id, name);
         customers.add(customer);
@@ -74,8 +74,7 @@ public class ECommerceSystem {
             return;
         }
 
-        System.out.print("Enter customer ID: ");
-        int customerId = scanner.nextInt();
+        int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
@@ -83,8 +82,7 @@ public class ECommerceSystem {
             return;
         }
 
-        System.out.print("Enter product ID to add to cart: ");
-        int productId = scanner.nextInt();
+        int productId = getIntInput("Enter product ID to add to cart: ");
         Product product = findProduct(productId);
 
         if (product == null) {
@@ -102,8 +100,7 @@ public class ECommerceSystem {
             return;
         }
 
-        System.out.print("Enter customer ID: ");
-        int customerId = scanner.nextInt();
+        int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
@@ -129,8 +126,7 @@ public class ECommerceSystem {
             return;
         }
 
-        System.out.print("Enter customer ID: ");
-        int customerId = scanner.nextInt();
+        int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
@@ -149,8 +145,7 @@ public class ECommerceSystem {
             System.out.println(product);
         }
 
-        System.out.print("Enter product ID to remove from cart: ");
-        int productId = scanner.nextInt();
+        int productId = getIntInput("Enter product ID to remove from cart: ");
         Product product = findProduct(productId);
 
         if (product == null) {
@@ -168,8 +163,7 @@ public class ECommerceSystem {
             return;
         }
 
-        System.out.print("Enter customer ID: ");
-        int customerId = scanner.nextInt();
+        int customerId = getIntInput("Enter customer ID: ");
         Customer customer = findCustomer(customerId);
 
         if (customer == null) {
@@ -216,6 +210,32 @@ public class ECommerceSystem {
                 .filter(p -> p.getProductID() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    private static String getStringInput(String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Input cannot be empty. Please try again.");
+            }
+        } while (input.isEmpty());
+        return input;
+    }
+
+    private static int getIntInput(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                int input = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                return input;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Consume invalid input
+            }
+        }
     }
 }
 
