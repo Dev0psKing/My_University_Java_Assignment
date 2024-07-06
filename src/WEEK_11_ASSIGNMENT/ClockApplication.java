@@ -46,7 +46,7 @@ class Clock {
         while (running) {
             currentTime.set(new Date());
             try {
-                Thread.sleep(300);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Update thread interrupted: " + e.getMessage());
@@ -59,7 +59,7 @@ class Clock {
         while (running) {
             try {
                 System.out.print("\r" + formatter.get().format(currentTime.get()));
-                Thread.sleep(30000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Display thread interrupted: " + e.getMessage());
