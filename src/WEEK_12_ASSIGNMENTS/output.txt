@@ -1,0 +1,58 @@
+Library Catalog Menu:
+1. Add a new item
+2. Remove an item
+3. View catalog
+4. Exit
+Enter your choice: uWOR
+Invalid input. Please enter a number between 1 and 4.
+
+Library Catalog Menu:
+1. Add a new item
+2. Remove an item
+3. View catalog
+4. Exit
+Enter your choice: 1
+Enter title: Java Programming
+Enter author: John Doe
+Enter item ID: 001
+Item added successfully.
+
+Library Catalog Menu:
+1. Add a new item
+2. Remove an item
+3. View catalog
+4. Exit
+Enter your choice: 3
+
+Current Catalog:
+0: Title: Java Programming, Author: John Doe, ID: 001
+
+Library Catalog Menu:
+1. Add a new item
+2. Remove an item
+3. View catalog
+4. Exit
+Enter your choice: 2
+Enter the index of the item to remove: 5
+Invalid index. Item not found. Please try again.
+Enter the index of the item to remove: abc
+Invalid input. Please enter a valid index.
+Enter the index of the item to remove: 0
+Item removed successfully.
+
+Library Catalog Menu:
+1. Add a new item
+2. Remove an item
+3. View catalog
+4. Exit
+Enter your choice: 3
+
+Current Catalog:
+
+Library Catalog Menu:
+1. Add a new item
+2. Remove an item
+3. View catalog
+4. Exit
+Enter your choice: 4
+Exiting...
