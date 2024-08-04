@@ -1,0 +1,3 @@
+public static void writeFile(Path filePath, String content) throws IOException {
+    Files.write(filePath, content.getBytes());
+}
