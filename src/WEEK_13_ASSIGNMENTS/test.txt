@@ -1,3 +1,10 @@
-public static void writeFile(Path filePath, String content) throws IOException {
-    Files.write(filePath, content.getBytes());
+public static void copyLargeFile(Path source, Path destination) throws IOException {
+    try (BufferedReader reader = Files.newBufferedReader(source);
+         BufferedWriter writer = Files.newBufferedWriter(destination)) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            writer.write(line);
+            writer.newLine();
+        }
+    }
 }
