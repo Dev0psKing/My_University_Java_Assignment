@@ -1,10 +1,6 @@
-public static void copyLargeFile(Path source, Path destination) throws IOException {
-    try (BufferedReader reader = Files.newBufferedReader(source);
-         BufferedWriter writer = Files.newBufferedWriter(destination)) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            writer.write(line);
-            writer.newLine();
-        }
-    }
+public static SSLServerSocket createSSLServerSocket(int port) throws Exception {
+    SSLServerSocketFactory factory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+    SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(port);
+    serverSocket.setNeedClientAuth(true);
+    return serverSocket;
 }
