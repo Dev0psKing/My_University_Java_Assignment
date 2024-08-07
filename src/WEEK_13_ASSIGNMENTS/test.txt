@@ -1,12 +1,8 @@
-BEGIN TRANSACTION;
+ComboPooledDataSource cpds = new ComboPooledDataSource();
+cpds.setDriverClass("com.mysql.jdbc.Driver");
+cpds.setJdbcUrl("jdbc:mysql://localhost:3306/marketplace_db");
+cpds.setUser("username");
+cpds.setPassword("password");
 
-TRY
-    UPDATE inventory SET quantity = @new_quantity WHERE product_id = @product_id;
-    INSERT INTO inventory_history (product_id, old_quantity, new_quantity, updated_at)
-    VALUES (@product_id, @old_quantity, @new_quantity, CURRENT_TIMESTAMP);
-    
-    COMMIT TRANSACTION;
-CATCH
-    ROLLBACK TRANSACTION;
-    -- Handle error
-END TRY;
+// Later, get a connection from the pool
+Connection conn = cpds.getConnection();
