@@ -1,6 +1,13 @@
-public static SSLServerSocket createSSLServerSocket(int port) throws Exception {
-    SSLServerSocketFactory factory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-    SSLServerSocket serverSocket = (SSLServerSocket) factory.createServerSocket(port);
-    serverSocket.setNeedClientAuth(true);
-    return serverSocket;
-}
+BEGIN TRANSACTION;
+
+TRY
+    UPDATE inventory SET quantity = quantity - @ordered_quantity WHERE product_id = @product_id;
+    INSERT INTO orders (user_id, product_id, quantity, total_price) VALUES (@user_id, @product_id, @ordered_quantity, @total_price);
+    UPDATE users SET total_purchases = total_purchases + 1 WHERE user_id = @user_id;
+    INSERT INTO payments (order_id, amount, status) VALUES (@order_id, @total_price, 'processed');
+    
+    COMMIT TRANSACTION;
+CATCH
+    ROLLBACK TRANSACTION;
+    -- Handle error
+END TRY;
