@@ -1,10 +1,9 @@
 BEGIN TRANSACTION;
 
 TRY
-    UPDATE inventory SET quantity = quantity - @ordered_quantity WHERE product_id = @product_id;
-    INSERT INTO orders (user_id, product_id, quantity, total_price) VALUES (@user_id, @product_id, @ordered_quantity, @total_price);
-    UPDATE users SET total_purchases = total_purchases + 1 WHERE user_id = @user_id;
-    INSERT INTO payments (order_id, amount, status) VALUES (@order_id, @total_price, 'processed');
+    UPDATE inventory SET quantity = @new_quantity WHERE product_id = @product_id;
+    INSERT INTO inventory_history (product_id, old_quantity, new_quantity, updated_at)
+    VALUES (@product_id, @old_quantity, @new_quantity, CURRENT_TIMESTAMP);
     
     COMMIT TRANSACTION;
 CATCH
