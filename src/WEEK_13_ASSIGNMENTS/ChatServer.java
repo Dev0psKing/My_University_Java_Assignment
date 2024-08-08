@@ -174,6 +174,7 @@ class ServerClientHandler extends Thread {
 
             System.out.println("Error closing socket for user " + userId + ": " + e.getMessage());
 
+
         }
 
     }
