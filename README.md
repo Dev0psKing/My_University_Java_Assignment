@@ -1,61 +1,66 @@
+# WeatherApp README
 
-# My University Java Assignments
+## Overview
+WeatherApp is a simple Java-based desktop application that provides current weather information for a specified location. The app fetches weather data from an external API, processes it, and displays the information on a graphical user interface (GUI) built with Swing.
 
-This repository contains the Java projects I did in my university this semester as assignments awarded by my Professor. in Computer Science Department, spanning across 8 weeks. Each week features a different project, demonstrating various Java programming skills and concepts.
+## Features
+- **Search Functionality**: Enter the name of a city or location to retrieve the current weather information.
+- **Weather Display**: Shows the temperature, weather condition, humidity, and wind speed.
+- **Dynamic Weather Icons**: Displays corresponding weather icons based on current conditions (Clear, Cloudy, Rain, Snow).
+- **Responsive Design**: The application is designed to run smoothly on any desktop environment, with a fixed window size.
 
-## Table of Contents
-- [Week 1: Java Quiz Game](#week-1-java-quiz-game)
-- [Week 2: Library Management System](#week-2-library-management-system)
-- [Week 3: Student Record Management System](#week-3-student-record-management-system)
-- [Week 4: Stock Price Analysis](#week-4-stock-price-analysis)
-- [Week 5: Library Management System](#week-5-library-management-system)
-- [Week 6: Employee Processing Application](#week-6-employee-processing-application)
-- [Week 7: Employee Processing Application](#week-7-employee-processing-application)
-- [Week 8: Employee Management Application](#week-8-employee-management-application)
+## Requirements
+- Java Development Kit (JDK) 8 or higher
+- Internet connection (to fetch weather data from the external API)
 
-## Week 1: Java Quiz Game
-Welcome to the Java Quiz Game! This interactive console application tests your knowledge on various topics with a series of multiple-choice questions. It's a fun way to challenge yourself and learn new facts.
+## Setup and Running the Application
 
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_1_ASSIGNMENTS/README.md)
+### 1. Clone the Repository
+Clone the repository to your local machine using the following command:
 
-## Week 2: Library Management System
-Welcome to the Library Management System! This Java program allows you to manage a library's inventory by adding, borrowing, and returning books. It's a simple yet effective tool for keeping track of books in your library.
+### 2. Open the Project in IntelliJ IDEA
+1. Open IntelliJ IDEA.
+2. Select **Open** and navigate to the cloned repository.
+3. Open the project.
 
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_2_ASSIGNMENTS/readme.md)
+### 3. Build and Run the Application
+1. Ensure that all dependencies are properly configured.
+2. Build the project using the **Build** option in IntelliJ IDEA.
+3. Run the `AppLauncher` class to start the application.
 
-## Week 3: Student Record Management System
-This is a Java program that implements a simple Student Record Management System. It allows administrators to perform various operations on student records, such as adding new students, updating existing student information, and viewing the list of students.
+### 4. Using the Application
+- Enter the name of a city or location in the search bar.
+- Click the search button (magnifying glass icon) to retrieve and display the current weather information.
 
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_3_ASSIGNMENT/readme.md)
+## Code Structure
 
-## Week 4: Stock Price Analysis
-This Java program, StockPriceAnalysis, is designed to perform various analyses on a set of stock prices. It provides functionalities to calculate the average stock price, find the maximum stock price, determine the occurrence count of a specific price, and compute the cumulative sum of stock prices.
+### 1. `AppLauncher.java`
+This class serves as the entry point of the application. It initializes the GUI by invoking the `WeatherAppGUI` class.
 
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_4_ASSIGNMENT/readme.md)
+### 2. `WeatherAppGUI.java`
+This class handles the graphical user interface (GUI) of the application. It includes:
+- Components like text fields, labels, and buttons.
+- Event listeners for user interactions.
+- Methods to update the display based on weather data.
 
-## Week 5: Library Management System
-Description
-This Java program is designed to manage a library's collection of books. It allows users to perform various tasks such as adding books, borrowing books, returning books, and exiting the program.
+### 3. `WeatherApp.java`
+This class contains the backend logic for fetching and processing weather data. It includes:
+- Methods to get location coordinates.
+- API calls to fetch weather data.
+- Parsing and processing the retrieved data.
+- Helper methods to convert and format data.
 
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_5_ASSIGNMENTS/Task.readme.md)
+## Important Notes
+- **API Limits**: Be aware of the rate limits imposed by the weather API being used. Frequent requests may lead to temporary blocks.
+- **Error Handling**: The application includes basic error handling for API requests and invalid user inputs.
 
-## Week 6: Employee Processing Application
-Overview
-The EmployeeProcessing application is designed to manage and process employee data. It allows users to input details for multiple employees, then perform various operations such as filtering based on age, calculating average salary, and generating lists of employee information.
+## Customization
+- **Icons**: You can replace the weather icons in the `src/assets/` directory with your own images, ensuring they have the same filenames.
+- **API Endpoint**: The application currently uses the Open-Meteo API. You can modify the `WeatherApp.java` file to use a different API by changing the URLs and parsing logic accordingly.
 
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_6_ASSIGNMENTS/Documentation.md)
-
-## Week 7: Employee Processing Application
-Overview
-The EmployeeProcessing application is designed to manage and process employee data. It allows users to input details for multiple employees, then perform various operations such as filtering based on age, calculating average salary, and generating lists of employee information.
-
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_7-ASSIGNMENTS/Documentation.md)
-
-## Week 8: Employee Management Application
-Overview
-This Java application allows users to manage a list of employees by inputting their details, processing the data, and performing various operations such as filtering by age, concatenating name and department, and calculating the average salary. The application uses Java Streams and the Function interface to handle and process employee data efficiently.
-
-[Read more](https://github.com/Dev0psKing/My_University_Java_Assignment/blob/master/src/WEEK_8_ASSIGNMENTS/Documentation.md)
+## Troubleshooting
+- **API Connection Issues**: Ensure you have a stable internet connection. If the app fails to connect to the API, check if the API is accessible via a web browser.
+- **Invalid Location**: If no weather data is displayed, verify the location name or try a different location.
 
 
-This `README.md` file provides an overview of each project completed over the 8 weeks, with links to detailed documentation for each assignment.
+Enjoy your weather updates with WeatherApp!

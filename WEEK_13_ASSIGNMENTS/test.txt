@@ -1,8 +1,77 @@
-ComboPooledDataSource cpds = new ComboPooledDataSource();
-cpds.setDriverClass("com.mysql.jdbc.Driver");
-cpds.setJdbcUrl("jdbc:mysql://localhost:3306/marketplace_db");
-cpds.setUser("username");
-cpds.setPassword("password");
+# WeatherApp README
 
-// Later, get a connection from the pool
-Connection conn = cpds.getConnection();
+## Overview
+WeatherApp is a simple Java-based desktop application that provides current weather information for a specified location. The app fetches weather data from an external API, processes it, and displays the information on a graphical user interface (GUI) built with Swing.
+
+## Features
+- **Search Functionality**: Enter the name of a city or location to retrieve the current weather information.
+- **Weather Display**: Shows the temperature, weather condition, humidity, and wind speed.
+- **Dynamic Weather Icons**: Displays corresponding weather icons based on current conditions (Clear, Cloudy, Rain, Snow).
+- **Responsive Design**: The application is designed to run smoothly on any desktop environment, with a fixed window size.
+
+## Requirements
+- Java Development Kit (JDK) 8 or higher
+- Internet connection (to fetch weather data from the external API)
+
+## Setup and Running the Application
+
+### 1. Clone the Repository
+Clone the repository to your local machine using the following command:
+
+```bash
+git clone <repository-url>
+```
+
+### 2. Open the Project in IntelliJ IDEA
+1. Open IntelliJ IDEA.
+2. Select **Open** and navigate to the cloned repository.
+3. Open the project.
+
+### 3. Build and Run the Application
+1. Ensure that all dependencies are properly configured.
+2. Build the project using the **Build** option in IntelliJ IDEA.
+3. Run the `AppLauncher` class to start the application.
+
+### 4. Using the Application
+- Enter the name of a city or location in the search bar.
+- Click the search button (magnifying glass icon) to retrieve and display the current weather information.
+
+## Code Structure
+
+### 1. `AppLauncher.java`
+This class serves as the entry point of the application. It initializes the GUI by invoking the `WeatherAppGUI` class.
+
+### 2. `WeatherAppGUI.java`
+This class handles the graphical user interface (GUI) of the application. It includes:
+- Components like text fields, labels, and buttons.
+- Event listeners for user interactions.
+- Methods to update the display based on weather data.
+
+### 3. `WeatherApp.java`
+This class contains the backend logic for fetching and processing weather data. It includes:
+- Methods to get location coordinates.
+- API calls to fetch weather data.
+- Parsing and processing the retrieved data.
+- Helper methods to convert and format data.
+
+## Important Notes
+- **API Limits**: Be aware of the rate limits imposed by the weather API being used. Frequent requests may lead to temporary blocks.
+- **Error Handling**: The application includes basic error handling for API requests and invalid user inputs.
+
+## Customization
+- **Icons**: You can replace the weather icons in the `src/assets/` directory with your own images, ensuring they have the same filenames.
+- **API Endpoint**: The application currently uses the Open-Meteo API. You can modify the `WeatherApp.java` file to use a different API by changing the URLs and parsing logic accordingly.
+
+## Troubleshooting
+- **API Connection Issues**: Ensure you have a stable internet connection. If the app fails to connect to the API, check if the API is accessible via a web browser.
+- **Invalid Location**: If no weather data is displayed, verify the location name or try a different location.
+
+## Contributing
+Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request with your changes.
+
+## License
+This project is licensed under the MIT License.
+
+---
+
+Enjoy your weather updates with WeatherApp!
